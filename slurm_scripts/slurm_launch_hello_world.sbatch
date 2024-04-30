@@ -41,4 +41,4 @@ LD_LIBRARY_PATH=/opt/amazon/efa/lib:/usr/local/lib:$LD_LIBRARY_PATH:/usr/local/m
 NCCL_SOCKET_IFNAME=enp71s0,\
 FI_PROVIDER=efa"
 
-srun $export_args --container-image=/admin/enroot/saved/pytorchlightning+pytorch_lightning.sqsh --container-mounts=/admin:/admin,/lustre:/lustre bash -c "ulimit -n 65536 && ulimit -a && cd $CODEPATH && pip install trl && python hello_world.py"
+srun $export_args --container-image=/admin/enroot/saved/trl-latest-gpu.sqsh --container-mounts=/admin:/admin,/lustre:/lustre bash -c "ulimit -n 65536 && ulimit -a && cd $CODEPATH && python hello_world.py"
