@@ -58,12 +58,7 @@ WANDB_API_KEY=adeed84abba561220d2655bb9d78873555b6bdea,\
 WANDB_PROJECT=dey_project,\
 PYTHONPATH=$CODEPATH,\
 OMP_NUM_THREADS=1,\
-NCCL_SHM_DISABLE=1,\
-FI_EFA_USE_DEVICE_RDMA=1,\
-OPAL_PREFIX=/opt/hpcx/ompi,\
-LD_LIBRARY_PATH=/opt/amazon/efa/lib:/usr/local/lib:$LD_LIBRARY_PATH:/usr/local/mpi/lib,\
-NCCL_SOCKET_IFNAME=enp71s0,\
-FI_PROVIDER=efa"
+"
 
 export CMD="$LAUNCHER $SCRIPT $SCRIPT_ARGS"
 
