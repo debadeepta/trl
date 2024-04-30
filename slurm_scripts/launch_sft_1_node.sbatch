@@ -62,4 +62,4 @@ OMP_NUM_THREADS=1,\
 
 export CMD="$LAUNCHER $SCRIPT $SCRIPT_ARGS"
 
-srun $export_args --container-image=/admin/enroot/saved/ngc_pytorch:24.04.sqsh --container-mounts=/admin:/admin,/lustre:/lustre bash -c "ulimit -n 65536 && ulimit -a && cd && git clone https://github.com/TimDettmers/bitsandbytes.git && cd bitsandbytes && pip install -r requirements-dev.txt && cmake -DCOMPUTE_BACKEND=cuda -S . && make && pip install . && cd $CODEPATH && pip install --upgrade trl && pip install wandb && $CMD"
+srun $export_args --container-image=/admin/enroot/saved/ngc_pytorch:24.04.sqsh --container-mounts=/admin:/admin,/lustre:/lustre bash -c "ulimit -n 65536 && ulimit -a && cd $BBPATH && pip install -r requirements-dev.txt && cmake -DCOMPUTE_BACKEND=cuda -S . && make && pip install . && cd $CODEPATH && pip install --upgrade trl && pip install wandb && $CMD"
