@@ -54,7 +54,7 @@ export SCRIPT_ARGS=" \
     "
 
 export_args="--export=ALL,\
-WANDB_API_KEY=adeed84abba561220d2655bb9d78873555b6bdea,\
+WANDB_API_KEY=wandbkey,\
 WANDB_PROJECT=dey_project,\
 PYTHONPATH=$CODEPATH,\
 OMP_NUM_THREADS=1,\
