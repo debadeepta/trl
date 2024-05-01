@@ -44,6 +44,7 @@ export SCRIPT="scripts/reward_modeling_hippo.py"
 export SCRIPT_ARGS=" \
     --model_name_or_path=facebook/opt-350m \
     --output_dir=$OUTPUT_DIR/"reward_model" \
+    --dataset_path=$DATAPATH \
     --per_device_train_batch_size=64 \
     --num_train_epochs=10 \
     --gradient_accumulation_steps=16 \
