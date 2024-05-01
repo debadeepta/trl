@@ -15,6 +15,7 @@
 JOBNAME=trl_rm
 OUTPUTDIR=/lustre/alignment/alignment_checkpoints/outputs_dey
 CODEPATH=/lustre/alignment/alignment_checkpoints/dey_sources/trl
+DATAPATH=/lustre/alignment/alignment_checkpoints/datasets/15-march_rep_only_1.5k_neel_4k_shuf_for_RM.hf
 BBPATH=/lustre/alignment/alignment_checkpoints/dey_sources/bitsandbytes
 RANK_ZERO_HOST=$(scontrol show hostname $SLURM_NODELIST | head -n 1)
 RANK_ZERO_IP=${RANK_ZERO_HOST/ip-/}

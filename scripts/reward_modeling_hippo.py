@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-python examples/scripts/reward_modeling.py \
+python scripts/reward_modeling_hippo.py \
     --model_name_or_path=facebook/opt-350m \
     --output_dir="reward_model" \
+    --dataset_path="/Users/dey/Documents/datasets/15-march_rep_only_1.5k_neel_4k_shuf_for_RM.hf" \
     --per_device_train_batch_size=64 \
     --num_train_epochs=10 \
     --gradient_accumulation_steps=16 \
@@ -32,6 +33,7 @@ python examples/scripts/reward_modeling.py \
 import warnings
 
 import torch
+from dataclasses import dataclass, field
 from datasets import load_dataset, load_from_disk
 from tqdm import tqdm
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, HfArgumentParser
@@ -41,10 +43,14 @@ from trl import ModelConfig, RewardConfig, RewardTrainer, get_kbit_device_map, g
 
 tqdm.pandas()
 
+@dataclass
+class DataPathConfig:
+    dataset_path: str = field(default=None, metadata={"help": "Path to the dataset."})
+
 
 if __name__ == "__main__":
-    parser = HfArgumentParser((RewardConfig, ModelConfig))
-    reward_config, model_config = parser.parse_args_into_dataclasses()
+    parser = HfArgumentParser((RewardConfig, ModelConfig, DataPathConfig))
+    reward_config, model_config, data_path_config = parser.parse_args_into_dataclasses()
     reward_config.gradient_checkpointing_kwargs = dict(use_reentrant=False)
 
     ################
@@ -77,7 +83,8 @@ if __name__ == "__main__":
     # Dataset
     ################
     # raw_datasets = load_dataset("Anthropic/hh-rlhf")
-    raw_datasets = load_from_disk("/Users/dey/Documents/datasets/15-march_rep_only_1.5k_neel_4k_shuf_for_RM.hf")
+    # "/Users/dey/Documents/datasets/15-march_rep_only_1.5k_neel_4k_shuf_for_RM.hf"
+    raw_datasets = load_from_disk(data_path_config.dataset_path)
     # Tokenize chosen/rejected pairs of inputs
     # Adapt this section to your needs for custom datasets
 
