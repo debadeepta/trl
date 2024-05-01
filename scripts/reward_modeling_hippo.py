@@ -25,12 +25,12 @@ python examples/scripts/reward_modeling.py \
     --optim="adamw_torch" \
     --logging_steps=10 \
     --evaluation_strategy="steps" \
-    --max_length=512 \
+    --max_length=8 \
 """
 import warnings
 
 import torch
-from datasets import load_dataset
+from datasets import load_dataset, load_from_disk
 from tqdm import tqdm
 from transformers import AutoModelForSequenceClassification, AutoTokenizer, HfArgumentParser
 
@@ -74,7 +74,8 @@ if __name__ == "__main__":
     ################
     # Dataset
     ################
-    raw_datasets = load_dataset("Anthropic/hh-rlhf")
+    # raw_datasets = load_dataset("Anthropic/hh-rlhf")
+    raw_datasets = load_from_disk("/Users/dey/Documents/datasets/15-march_rep_only_1.5k_neel_4k_shuf_for_RM.hf")
     # Tokenize chosen/rejected pairs of inputs
     # Adapt this section to your needs for custom datasets
 
