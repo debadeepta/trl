@@ -27,7 +27,9 @@ def create_dataset(dpo_data):
         data["chosen"].append(input_chosen)
         data["rejected"].append(input_rejected)
 
-    return Dataset.from_dict(data)
+    ds = Dataset.from_dict(data)
+    ds = ds.train_test_split(test_size=0.2)
+    return ds    
 
 
 def main(args: argparse.Namespace):
