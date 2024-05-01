@@ -24,6 +24,7 @@ python examples/scripts/reward_modeling.py \
     --remove_unused_columns=False \
     --optim="adamw_torch" \
     --logging_steps=10 \
+    --eval_steps=10 \
     --evaluation_strategy="steps" \
     --max_length=512 \
     --lora_task_type SEQ_CLS
