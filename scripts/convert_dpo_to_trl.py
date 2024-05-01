@@ -16,31 +16,16 @@ def load_jsonl(input_path):
 
 
 def create_dataset(dpo_data):
-    model_id = "meta-llama/Meta-Llama-3-8B"
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
-
     data = {
-        "input_chosen_tokens": [],
-        "input_rejected_tokens": [],
-        "attention_mask_chosen": [],
-        "attention_mask_rejected": []
+        "chosen": [],
+        "rejected": [],
     }
     for dpo_data_point in dpo_data:
         input_chosen = dpo_data_point['instruction'] + ' ' + dpo_data_point['output'][0]
         input_rejected = dpo_data_point['instruction'] + ' ' + dpo_data_point['output'][1]
 
-        # tokenize the inputs
-        input_chosen_tokens = tokenizer.encode(input_chosen, return_tensors='pt')
-        input_rejected_tokens = tokenizer.encode(input_rejected, return_tensors='pt')
-
-        # create attention masks
-        attention_mask_chosen = [1] * len(input_chosen_tokens[0])
-        attention_mask_rejected = [1] * len(input_rejected_tokens[0])
-
-        data["input_chosen_tokens"].append(input_chosen_tokens)
-        data["input_rejected_tokens"].append(input_rejected_tokens)
-        data["attention_mask_chosen"].append(attention_mask_chosen)
-        data["attention_mask_rejected"].append(attention_mask_rejected)
+        data["chosen"].append(input_chosen)
+        data["rejected"].append(input_rejected)
 
     return Dataset.from_dict(data)
 
